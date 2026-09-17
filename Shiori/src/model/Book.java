@@ -1,38 +1,42 @@
 package model;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Book implements Serializable {
 
 	//	管理番号
 	private int id;
-	//	食材名
-	private String name;
+	//	タイトル
+	private String title;
 	//	カテゴリ
 	private String category;
-	//	保存場所
-	private String storage;
+	//	途中巻数
+	private int volume;
+	//	途中ページ
+	private int page;
+	//	状態（未読 or 途中 or 読了）
+	private String situation;
 	//	更新日
-	private LocalDate updateDate;
-	//	賞味期限
-	private LocalDate bestByDate;
-	//	消費期限
-	private LocalDate useByDate;
-	//	在庫判定
-	private boolean stock;
+	private LocalDate lastUpdate;
 
 	//	コンストラクタ
-	public Book(int id, String name, String category, String storage, LocalDate updateDate, LocalDate bestByDate,
-			LocalDate useByDate, boolean stock) {
+	public Book(int id, String title, String category, int volume, int page, String situation, LocalDate lastUpdate) {
 		this.id = id;
-		this.name = name;
+		this.title = title;
 		this.category = category;
-		this.storage = storage;
-		this.updateDate = updateDate;
-		this.bestByDate = bestByDate;
-		this.useByDate = useByDate;
-		this.stock = stock;
+		this.volume = volume;
+		this.page = page;
+		this.situation = situation;
+		this.lastUpdate = lastUpdate;
 	}
 
 	//	ゲッタ、セッタ
@@ -44,12 +48,12 @@ public class Book implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getCategory() {
@@ -60,44 +64,73 @@ public class Book implements Serializable {
 		this.category = category;
 	}
 
-	public String getStorage() {
-		return storage;
+	public int getVolume() {
+		return volume;
 	}
 
-	public void setStorage(String storage) {
-		this.storage = storage;
+	public void setVolume(int volume) {
+		this.volume = volume;
 	}
 
-	public LocalDate getUpdateDate() {
-		return updateDate;
+	public int getPage() {
+		return page;
 	}
 
-	public void setUpdateByDate(LocalDate updateDate) {
-		this.updateDate = updateDate;
+	public void setPage(int page) {
+		this.page = page;
 	}
 
-	public LocalDate getBestByDate() {
-		return bestByDate;
+	public String getSituation() {
+		return situation;
 	}
 
-	public void setBestByDate(LocalDate bestByDate) {
-		this.bestByDate = bestByDate;
+	public void setSituation(String situation) {
+		this.situation = situation;
 	}
 
-	public LocalDate getUseByDate() {
-		return useByDate;
+	public LocalDate getLastUpdate() {
+		return lastUpdate;
 	}
 
-	public void setUseByDate(LocalDate useByDate) {
-		this.useByDate = useByDate;
+	public void setLastUpdate(LocalDate lastUpdate) {
+		this.lastUpdate = lastUpdate;
 	}
 
-	public boolean getStock() {
-		return stock;
+	//	オブジェクト保存
+	public static void serialize(ArrayList<Book> list) {
+		try {
+			ObjectOutputStream objOutStream = new ObjectOutputStream(
+					new FileOutputStream("src/model/Book.bin"));
+
+			objOutStream.writeObject(list);
+			objOutStream.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void setStock(boolean stock) {
-		this.stock = stock;
+	//	オブジェクト読み込み
+	public static ArrayList<Book> deserialize() {
+		List<Book> list = new ArrayList<Book>();
+		try {
+			ObjectInputStream objInStream = new ObjectInputStream(
+					new FileInputStream("src/model/Book.bin"));
+
+			List<Book> list2 = (ArrayList<Book>) objInStream.readObject();
+			list = list2;
+			objInStream.close();
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		return (ArrayList<Book>) list;
 	}
 
 }
