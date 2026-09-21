@@ -1,7 +1,8 @@
 package constant;
 
 public class MenuConst {
-	public static void displayMenu() {
+	//	メニュー表示
+	public void displayMenu() {
 		System.out.println("==============================");
 		System.out.println("=======     Shiori      ======");
 		System.out.println("==============================");
@@ -15,7 +16,7 @@ public class MenuConst {
 		System.out.println("番号: ");
 	}
 
-	//	debug
+	//	デバッグ
 	//	public static void main(String[] args) {
 	//		displayMenu();
 	//	}
