@@ -13,7 +13,6 @@ public class MenuConst {
 		System.out.println("4: 削除");
 		System.out.println("0: 終了");
 		System.out.println();
-		System.out.println("番号: ");
 	}
 
 	//	デバッグ
