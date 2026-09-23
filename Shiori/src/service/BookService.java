@@ -439,7 +439,7 @@ public class BookService {
 		bookService.addBook("鬼滅の刃", "漫画", "途中", 1, 53);
 		bookService.addBook("銀魂", "漫画", "途中", 54, 100);
 		bookService.addBook("銀河鉄道の夜", "小説", "途中", 1, 200);
-		bookService.addBook("あいうえお", "雑誌", "未読", 30, 1);
+		bookService.addBook("あいうえお", "雑誌", "未読", 0, 0);
 		bookService.addBook("aiueo", "絵本", "読了", 100, 123);
 		bookService.books.get(4).setLastUpdate(LocalDate.of(2026, 9, 22));
 		bookService.showBooks(bookService.books);
