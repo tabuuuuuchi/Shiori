@@ -68,6 +68,7 @@ public class BookService {
 		System.out.println();
 	}
 
+	//	書籍更新機能
 	public void updateBook(int id, String newTitle, String newCategory, String newSituation, int newVolume,
 			int newPage) {
 		for (Book book : books) {
@@ -82,8 +83,14 @@ public class BookService {
 		}
 	}
 
-	public void deleteBook() {
-
+	//	書籍削除機能
+	public void deleteBook(int id) {
+		books.remove(id - 1);
+		for (Book book : books) {
+			if (book.getId() > id) {
+				book.setId(book.getId() - 1);
+			}
+		}
 	}
 
 	//	オブジェクト保存
@@ -130,7 +137,8 @@ public class BookService {
 		bookService.addBook("銀魂", "漫画", "途中", 54, 100);
 		bookService.addBook("銀河鉄道の夜", "小説", "途中", 1, 200);
 		bookService.showBooks();
-		bookService.updateBook(1, "ゼクシィ", "雑誌", "未読", 0, 0);
+		bookService.deleteBook(1);
+		//		bookService.updateBook(1, "ゼクシィ", "雑誌", "未読", 0, 0);
 		bookService.showBooks();
 		//		bookService.serialize();
 	}
