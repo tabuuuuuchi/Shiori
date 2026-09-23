@@ -23,7 +23,7 @@ public class BookService {
 	}
 
 	//	書籍一覧表示
-	public void showBooks() {
+	public void showBooks(List<Book> bookList) {
 		TableUtil table = new TableUtil();
 		//	各列の幅
 		int idWidth = 5;
@@ -51,7 +51,7 @@ public class BookService {
 		System.out.println();
 
 		//	データ出力
-		for (Book book : books) {
+		for (Book book : bookList) {
 			table.printRow(
 					String.valueOf(book.getId()),
 					book.getTitle(),
@@ -91,6 +91,32 @@ public class BookService {
 				book.setId(book.getId() - 1);
 			}
 		}
+	}
+
+	//	書籍検索機能
+	public List<Book> searchBook(int judge, String searchWord, List<Book> bookList) {
+		List<Book> newBookList = new ArrayList<>();
+		switch (judge) {
+		case 1:
+			for (Book book : bookList) {
+				if (book.getTitle().contains(searchWord)) {
+					newBookList.add(book);
+				}
+			}
+		case 2:
+			for (Book book : bookList) {
+				if (book.getCategory().contains(searchWord)) {
+					newBookList.add(book);
+				}
+			}
+		case 3:
+			for (Book book : bookList) {
+				if (book.getSituation().contains(searchWord)) {
+					newBookList.add(book);
+				}
+			}
+		}
+		return newBookList;
 	}
 
 	//	オブジェクト保存
@@ -136,10 +162,10 @@ public class BookService {
 		bookService.addBook("鬼滅の刃", "漫画", "途中", 1, 53);
 		bookService.addBook("銀魂", "漫画", "途中", 54, 100);
 		bookService.addBook("銀河鉄道の夜", "小説", "途中", 1, 200);
-		bookService.showBooks();
-		bookService.deleteBook(1);
+		bookService.showBooks(bookService.books);
+		//		bookService.deleteBook(1);
 		//		bookService.updateBook(1, "ゼクシィ", "雑誌", "未読", 0, 0);
-		bookService.showBooks();
+		bookService.showBooks(bookService.searchBook(1, "鬼滅", bookService.books));
 		//		bookService.serialize();
 	}
 }
