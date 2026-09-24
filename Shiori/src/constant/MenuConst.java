@@ -4,7 +4,7 @@ public class MenuConst {
 	//	メニュー表示
 	public void displayMenu() {
 		System.out.println("==============================");
-		System.out.println("=======     Shiori      ======");
+		System.out.println("=======     Shiori     =======");
 		System.out.println("==============================");
 		System.out.println();
 		System.out.println("1: 登録");
@@ -17,6 +17,7 @@ public class MenuConst {
 
 	//	デバッグ
 	//	public static void main(String[] args) {
-	//		displayMenu();
+	//		MenuConst menu = new MenuConst();
+	//		menu.displayMenu();
 	//	}
 }

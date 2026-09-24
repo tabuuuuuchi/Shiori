@@ -12,7 +12,7 @@ public class TableUtil {
 		for (char c : text.toCharArray()) {
 			// 全角文字を大まかに判定
 			if (String.valueOf(c).getBytes().length > 1) {
-				doubleCurrentWidth += 1.8; // 全角は1.8幅
+				doubleCurrentWidth += 1.7; // 全角は1.7幅
 			} else {
 				doubleCurrentWidth += 1; // 半角は1幅
 			}

@@ -20,6 +20,10 @@ import util.TableUtil;
 public class BookService {
 	private final List<Book> books = new ArrayList<>();
 
+	public List<Book> getBooks() {
+		return books;
+	}
+
 	//	書籍追加
 	public void addBook(String title, String category, String situation, int volume, int page) {
 		Book book = new Book((books.size() + 1), title, category, situation, volume, page, LocalDate.now());
@@ -32,7 +36,7 @@ public class BookService {
 		//	各列の幅
 		int idWidth = 5;
 		int titleWidth = 25;
-		int categordWidth = 10;
+		int categordWidth = 12;
 		int situationWidth = 10;
 		int volumeWidth = 10;
 		int pageWidth = 10;
@@ -98,28 +102,28 @@ public class BookService {
 	}
 
 	//	書籍検索機能
-	public List<Book> searchBook(int judge, String searchWord, List<Book> bookList) {
+	public List<Book> searchBook(int judge, String searchWord) {
 		List<Book> newBookList = new ArrayList<>();
 		switch (judge) {
-		//	タイトルで並び替え
+		//	タイトルで検索
 		case 1:
-			for (Book book : bookList) {
+			for (Book book : books) {
 				if (book.getTitle().contains(searchWord)) {
 					newBookList.add(book);
 				}
 			}
 			break;
-		//	カテゴリで並び替え
+		//	カテゴリで検索
 		case 2:
-			for (Book book : bookList) {
+			for (Book book : books) {
 				if (book.getCategory().contains(searchWord)) {
 					newBookList.add(book);
 				}
 			}
 			break;
-		//	状態で並び替え
+		//	状態で検索
 		case 3:
-			for (Book book : bookList) {
+			for (Book book : books) {
 				if (book.getSituation().contains(searchWord)) {
 					newBookList.add(book);
 				}
@@ -130,7 +134,7 @@ public class BookService {
 	}
 
 	//	書籍並び替え機能
-	public List<Book> sortBook(int judge, int orderJudge, List<Book> bookList) {
+	public List<Book> sortBook(int judge, int orderJudge) {
 		List<Book> newBookList = new ArrayList<>();
 		List<Integer> sortedIntList = new ArrayList<>();
 		List<String> sortedStrList = new ArrayList<>();
@@ -140,7 +144,7 @@ public class BookService {
 		switch (judge) {
 		//	IDで並び替え
 		case 1:
-			for (Book book : bookList) {
+			for (Book book : books) {
 				sortedIntList.add(book.getId());
 			}
 
@@ -148,7 +152,7 @@ public class BookService {
 			if (orderJudge == 1) {
 				Collections.sort(sortedIntList);
 				for (int id : sortedIntList) {
-					for (Book book : bookList) {
+					for (Book book : books) {
 						if (book.getId() == id) {
 							if (newBookList.contains(book)) {
 								continue;
@@ -162,7 +166,7 @@ public class BookService {
 			} else if (orderJudge == 2) {
 				sortedIntList.sort(Comparator.reverseOrder());
 				for (int id : sortedIntList) {
-					for (Book book : bookList) {
+					for (Book book : books) {
 						if (book.getId() == id) {
 							if (newBookList.contains(book)) {
 								continue;
@@ -174,9 +178,9 @@ public class BookService {
 				}
 			}
 			break;
-			//	タイトルで並び替え
+		//	タイトルで並び替え
 		case 2:
-			for (Book book : bookList) {
+			for (Book book : books) {
 				sortedStrList.add(book.getTitle());
 			}
 
@@ -185,7 +189,7 @@ public class BookService {
 				sortedStrList.sort(collator);
 				;
 				for (String title : sortedStrList) {
-					for (Book book : bookList) {
+					for (Book book : books) {
 						if (book.getTitle() == title) {
 							if (newBookList.contains(book)) {
 								continue;
@@ -199,7 +203,7 @@ public class BookService {
 			} else if (orderJudge == 2) {
 				sortedStrList.sort(((Comparator<Object>) collator).reversed());
 				for (String title : sortedStrList) {
-					for (Book book : bookList) {
+					for (Book book : books) {
 						if (book.getTitle() == title) {
 							if (newBookList.contains(book)) {
 								continue;
@@ -211,9 +215,9 @@ public class BookService {
 				}
 			}
 			break;
-			//	カテゴリで並び替え
+		//	カテゴリで並び替え
 		case 3:
-			for (Book book : bookList) {
+			for (Book book : books) {
 				sortedStrList.add(book.getCategory());
 			}
 
@@ -222,7 +226,7 @@ public class BookService {
 				sortedStrList.sort(collator);
 				;
 				for (String category : sortedStrList) {
-					for (Book book : bookList) {
+					for (Book book : books) {
 						if (book.getCategory() == category) {
 							if (newBookList.contains(book)) {
 								continue;
@@ -236,7 +240,7 @@ public class BookService {
 			} else if (orderJudge == 2) {
 				sortedStrList.sort(((Comparator<Object>) collator).reversed());
 				for (String category : sortedStrList) {
-					for (Book book : bookList) {
+					for (Book book : books) {
 						if (book.getCategory() == category) {
 							if (newBookList.contains(book)) {
 								continue;
@@ -248,9 +252,9 @@ public class BookService {
 				}
 			}
 			break;
-			//	状態で並び替え
+		//	状態で並び替え
 		case 4:
-			for (Book book : bookList) {
+			for (Book book : books) {
 				sortedStrList.add(book.getSituation());
 			}
 
@@ -259,7 +263,7 @@ public class BookService {
 				sortedStrList.sort(collator);
 				;
 				for (String situation : sortedStrList) {
-					for (Book book : bookList) {
+					for (Book book : books) {
 						if (book.getSituation() == situation) {
 							if (newBookList.contains(book)) {
 								continue;
@@ -273,7 +277,7 @@ public class BookService {
 			} else if (orderJudge == 2) {
 				sortedStrList.sort(((Comparator<Object>) collator).reversed());
 				for (String situation : sortedStrList) {
-					for (Book book : bookList) {
+					for (Book book : books) {
 						if (book.getSituation() == situation) {
 							if (newBookList.contains(book)) {
 								continue;
@@ -285,9 +289,9 @@ public class BookService {
 				}
 			}
 			break;
-			//	途中巻数で並び替え
+		//	途中巻数で並び替え
 		case 5:
-			for (Book book : bookList) {
+			for (Book book : books) {
 				sortedIntList.add(book.getVolume());
 			}
 
@@ -295,7 +299,7 @@ public class BookService {
 			if (orderJudge == 1) {
 				Collections.sort(sortedIntList);
 				for (int volume : sortedIntList) {
-					for (Book book : bookList) {
+					for (Book book : books) {
 						if (book.getVolume() == volume) {
 							if (newBookList.contains(book)) {
 								continue;
@@ -309,7 +313,7 @@ public class BookService {
 			} else if (orderJudge == 2) {
 				sortedIntList.sort(Comparator.reverseOrder());
 				for (int volume : sortedIntList) {
-					for (Book book : bookList) {
+					for (Book book : books) {
 						if (book.getVolume() == volume) {
 							if (newBookList.contains(book)) {
 								continue;
@@ -321,9 +325,9 @@ public class BookService {
 				}
 			}
 			break;
-			//	途中ページで並び替え
+		//	途中ページで並び替え
 		case 6:
-			for (Book book : bookList) {
+			for (Book book : books) {
 				sortedIntList.add(book.getPage());
 			}
 
@@ -331,7 +335,7 @@ public class BookService {
 			if (orderJudge == 1) {
 				Collections.sort(sortedIntList);
 				for (int page : sortedIntList) {
-					for (Book book : bookList) {
+					for (Book book : books) {
 						if (book.getPage() == page) {
 							if (newBookList.contains(book)) {
 								continue;
@@ -345,7 +349,7 @@ public class BookService {
 			} else if (orderJudge == 2) {
 				sortedIntList.sort(Comparator.reverseOrder());
 				for (int page : sortedIntList) {
-					for (Book book : bookList) {
+					for (Book book : books) {
 						if (book.getPage() == page) {
 							if (newBookList.contains(book)) {
 								continue;
@@ -355,10 +359,11 @@ public class BookService {
 						}
 					}
 				}
-			}break;
-			//	更新日で並び替え
+			}
+			break;
+		//	更新日で並び替え
 		case 7:
-			for (Book book : bookList) {
+			for (Book book : books) {
 				sortedDateList.add(book.getLastUpdate());
 			}
 
@@ -366,7 +371,7 @@ public class BookService {
 			if (orderJudge == 1) {
 				sortedDateList.sort(LocalDate::compareTo);
 				for (LocalDate lastUpdate : sortedDateList) {
-					for (Book book : bookList) {
+					for (Book book : books) {
 						if (book.getLastUpdate() == lastUpdate) {
 							if (newBookList.contains(book)) {
 								continue;
@@ -380,7 +385,7 @@ public class BookService {
 			} else if (orderJudge == 2) {
 				sortedDateList.sort(Comparator.reverseOrder());
 				for (LocalDate lastUpdate : sortedDateList) {
-					for (Book book : bookList) {
+					for (Book book : books) {
 						if (book.getLastUpdate() == lastUpdate) {
 							if (newBookList.contains(book)) {
 								continue;
@@ -439,14 +444,14 @@ public class BookService {
 		bookService.addBook("鬼滅の刃", "漫画", "途中", 1, 53);
 		bookService.addBook("銀魂", "漫画", "途中", 54, 100);
 		bookService.addBook("銀河鉄道の夜", "小説", "途中", 1, 200);
-		bookService.addBook("あいうえお", "雑誌", "未読", 0, 0);
+		bookService.addBook("あいうえお", "ビジネス書", "未読", 0, 0);
 		bookService.addBook("aiueo", "絵本", "読了", 100, 123);
 		bookService.books.get(4).setLastUpdate(LocalDate.of(2026, 9, 22));
 		bookService.showBooks(bookService.books);
 		//		bookService.deleteBook(1);
 		//		bookService.updateBook(1, "ゼクシィ", "雑誌", "未読", 0, 0);
-//		bookService.showBooks(bookService.searchBook(3, "途中", bookService.books));
-		bookService.showBooks(bookService.sortBook(7, 2, bookService.books));
+		//		bookService.showBooks(bookService.searchBook(3, "途中", bookService.books));
+		bookService.showBooks(bookService.sortBook(7, 2));
 		//			bookService.serialize();
 	}
 }
