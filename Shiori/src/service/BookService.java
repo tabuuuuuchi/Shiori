@@ -24,7 +24,7 @@ public class BookService {
 		return books;
 	}
 
-	//	書籍追加
+	//	書籍登録
 	public void addBook(String title, String category, String situation, int volume, int page) {
 		Book book = new Book((books.size() + 1), title, category, situation, volume, page, LocalDate.now());
 		books.add(book);
@@ -95,7 +95,7 @@ public class BookService {
 	public void deleteBook(int id) {
 		books.remove(id - 1);
 		for (Book book : books) {
-			if (book.getId() > id) {
+			if (book.getId() >= id) {
 				book.setId(book.getId() - 1);
 			}
 		}
@@ -438,20 +438,20 @@ public class BookService {
 	}
 
 	//	デバッグ
-	public static void main(String[] args) {
-		BookService bookService = new BookService();
-		//			bookService.deserialize();
-		bookService.addBook("鬼滅の刃", "漫画", "途中", 1, 53);
-		bookService.addBook("銀魂", "漫画", "途中", 54, 100);
-		bookService.addBook("銀河鉄道の夜", "小説", "途中", 1, 200);
-		bookService.addBook("あいうえお", "ビジネス書", "未読", 0, 0);
-		bookService.addBook("aiueo", "絵本", "読了", 100, 123);
-		bookService.books.get(4).setLastUpdate(LocalDate.of(2026, 9, 22));
-		bookService.showBooks(bookService.books);
-		//		bookService.deleteBook(1);
-		//		bookService.updateBook(1, "ゼクシィ", "雑誌", "未読", 0, 0);
-		//		bookService.showBooks(bookService.searchBook(3, "途中", bookService.books));
-		bookService.showBooks(bookService.sortBook(7, 2));
-		//			bookService.serialize();
-	}
+	//	public static void main(String[] args) {
+	//		BookService bookService = new BookService();
+	//			bookService.deserialize();
+	//		bookService.addBook("鬼滅の刃", "漫画", "途中", 1, 53);
+	//		bookService.addBook("銀魂", "漫画", "途中", 54, 100);
+	//		bookService.addBook("銀河鉄道の夜", "小説", "途中", 1, 200);
+	//		bookService.addBook("あいうえお", "ビジネス書", "未読", 0, 0);
+	//		bookService.addBook("aiueo", "絵本", "読了", 100, 123);
+	//		bookService.books.get(4).setLastUpdate(LocalDate.of(2026, 9, 22));
+	//		bookService.showBooks(bookService.books);
+	//		bookService.deleteBook(1);
+	//		bookService.updateBook(1, "ゼクシィ", "雑誌", "未読", 0, 0);
+	//		bookService.showBooks(bookService.searchBook(3, "途中", bookService.books));
+	//		bookService.showBooks(bookService.sortBook(7, 2));
+	//		bookService.serialize();
+	//	}
 }

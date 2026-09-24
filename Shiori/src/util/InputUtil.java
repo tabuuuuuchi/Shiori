@@ -157,12 +157,13 @@ public class InputUtil {
 			System.out.print("番号: ");
 			menuNum = inputInt();
 
-			if (menuNum >= 1 && menuNum <= 3) {
+			if (menuNum >= 0 && menuNum <= 4) {
 				break;
 			} else {
 				System.out.println("存在しない選択肢です");
 			}
 		}
+		System.out.println();
 		return menuNum;
 	}
 
@@ -394,7 +395,7 @@ public class InputUtil {
 
 	//	更新タイトル入力
 	public String inputNewTitle(int id, List<Book> books) {
-		System.out.println("タイトルを更新しますか？");
+		System.out.println("タイトルを更新しますか？(元のタイトル: " + books.get(id).getTitle() + ")");
 		System.out.println("1: 更新する");
 		System.out.println("2: 更新しない");
 		int choice;
@@ -409,7 +410,7 @@ public class InputUtil {
 			}
 		}
 		System.out.println();
-		String newTitle = books.get(id).getTitle();
+		String newTitle = books.get(id - 1).getTitle();
 		if (choice == 1) {
 			newTitle = inputTitle();
 		}
@@ -419,7 +420,7 @@ public class InputUtil {
 
 	//	更新カテゴリ入力
 	public String inputNewCategory(int id, List<Book> books) {
-		System.out.println("カテゴリを更新しますか？");
+		System.out.println("カテゴリを更新しますか？(元のカテゴリ: " + books.get(id).getCategory() + ")");
 		System.out.println("1: 更新する");
 		System.out.println("2: 更新しない");
 		int choice;
@@ -434,7 +435,7 @@ public class InputUtil {
 			}
 		}
 		System.out.println();
-		String newCategory = books.get(id).getCategory();
+		String newCategory = books.get(id - 1).getCategory();
 		if (choice == 1) {
 			newCategory = inputCategory();
 		}
@@ -444,7 +445,7 @@ public class InputUtil {
 
 	//	更新状態入力
 	public String inputNewSituation(int id, List<Book> books) {
-		System.out.println("状態を更新しますか？");
+		System.out.println("状態を更新しますか？(元の状態: " + books.get(id).getSituation() + ")");
 		System.out.println("1: 更新する");
 		System.out.println("2: 更新しない");
 		int choice;
@@ -459,7 +460,7 @@ public class InputUtil {
 			}
 		}
 		System.out.println();
-		String newSituation = books.get(id).getSituation();
+		String newSituation = books.get(id - 1).getSituation();
 		if (choice == 1) {
 			newSituation = inputSituation();
 		}
@@ -469,7 +470,7 @@ public class InputUtil {
 
 	//	更新途中巻数入力
 	public int inputNewVolume(int id, List<Book> books) {
-		System.out.println("途中の巻数を更新しますか？");
+		System.out.println("途中の巻数を更新しますか？(元の途中の巻数: " + books.get(id).getVolume() + ")");
 		System.out.println("1: 更新する");
 		System.out.println("2: 更新しない");
 		int choice;
@@ -484,7 +485,7 @@ public class InputUtil {
 			}
 		}
 		System.out.println();
-		int newVolume = books.get(id).getVolume();
+		int newVolume = books.get(id - 1).getVolume();
 		if (choice == 1) {
 			newVolume = inputVolume();
 		}
@@ -494,7 +495,7 @@ public class InputUtil {
 
 	//	更新途中ページ入力
 	public int inputNewPage(int id, List<Book> books) {
-		System.out.println("途中のページを更新しますか？");
+		System.out.println("途中のページを更新しますか？(元の途中のページ: " + books.get(id).getPage() + ")");
 		System.out.println("1: 更新する");
 		System.out.println("2: 更新しない");
 		int choice;
@@ -509,7 +510,7 @@ public class InputUtil {
 			}
 		}
 		System.out.println();
-		int newPage = books.get(id).getPage();
+		int newPage = books.get(id - 1).getPage();
 		if (choice == 1) {
 			newPage = inputPage();
 		}
@@ -522,17 +523,17 @@ public class InputUtil {
 	}
 
 	//	デバッグ
-	public static void main(String[] args) {
-		InputUtil input = new InputUtil();
-		//		System.out.println(input.inputMenuNum());
-		//		System.out.println(input.inputTitle());
-		//		System.out.println(input.inputCategory());
-		//		System.out.println(input.inputSituation());
-		//		System.out.println(input.inputVolume());
-		//		System.out.println(input.inputPage());
-		//		System.out.println(input.inputShowBooksMenu());
-		//		System.out.println(input.inputSearchSubject());
-		//		System.out.println(input.inputOrder());
-		//		System.out.println(input.inputUpdateDeleteMenu());
-	}
+	//	public static void main(String[] args) {
+	//	InputUtil input = new InputUtil();
+	//		System.out.println(input.inputMenuNum());
+	//		System.out.println(input.inputTitle());
+	//		System.out.println(input.inputCategory());
+	//		System.out.println(input.inputSituation());
+	//		System.out.println(input.inputVolume());
+	//		System.out.println(input.inputPage());
+	//		System.out.println(input.inputShowBooksMenu());
+	//		System.out.println(input.inputSearchSubject());
+	//		System.out.println(input.inputOrder());
+	//		System.out.println(input.inputUpdateDeleteMenu());
+	//	}
 }
